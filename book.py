@@ -9,7 +9,7 @@ class Book:
     def __str__(self) -> str:
         return f"{self.title} by {self.author} ISBN no: {self.isbn}"
 
-    def __eq__(self, book):
+    def __eq__(self, book) -> bool:
         if isinstance(book, Book):
             return (self.title == book.title and
                     self.author == book.author and

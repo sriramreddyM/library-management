@@ -110,6 +110,15 @@ def delete_user():
 def checkout_book():
     user_id = input("Enter user ID: ")
     isbn = input("Enter ISBN of the book to checkout: ")
+    user = user_management.search_by_id(user_id)
+    # check if user and book exists before checkout
+    if user == []:
+        print(f"user not exist with user_id: {user_id}")
+        return
+    book = book_management.search_by_isbn(isbn)
+    if book == []:
+        print(f"book not exist with ISBN: {isbn}")
+        return
     record_management.checkout_book(user_id, isbn)
     storage_management.save()
     logger.log("Tried Book ISBN: {isbn} checkout by user: {user_id}")
@@ -117,6 +126,15 @@ def checkout_book():
 def checkin_book():
     user_id = input("Enter user ID: ")
     isbn = input("Enter ISBN of the book to checkout: ")
+    # check if user and book exists before checkin
+    user = user_management.search_by_id(user_id)
+    if user == []:
+        print(f"user not exist with user_id: {user_id}")
+        return
+    book = book_management.search_by_isbn(isbn)
+    if book == []:
+        print(f"book not exist with ISBN: {isbn}")
+        return
     record_management.checkin_book(user_id, isbn)
     storage_management.save()
     logger.log("Tried Book ISBN: {isbn} checkin by user: {user_id}")
@@ -204,7 +222,6 @@ def menu():
             print("Please select a valid operation")
     else:
         print("Please select a valid operation")
-        
         
 def main():
     while True:

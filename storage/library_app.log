@@ -1,1 +1,6 @@
 [2024-02-28 23:58:55] Added a new book: Head First Java by Kathy Sierra, ISBN: 0596009208, Quantity: 5
+[2024-02-29 00:52:23] Searched for book by isbn: 9780131101630
+[2024-02-29 00:52:54] Added user name: sriram, user_id 123
+[2024-02-29 00:53:08] Tried Book ISBN: {isbn} checkout by user: {user_id}
+[2024-02-29 00:53:25] Tried Book ISBN: {isbn} checkin by user: {user_id}
+[2024-02-29 00:53:48] Tried Book ISBN: {isbn} checkin by user: {user_id}
