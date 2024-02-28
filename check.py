@@ -1,0 +1,41 @@
+# check_ins = []
+# check_outs = []
+
+# def checkout_book(user_id, isbn):
+#     check_outs.append({"user_id": user_id, "isbn": isbn})
+
+# def checkin_book(user_id, isbn):
+#     check_ins.append({"user_id": user_id, "isbn": isbn})
+
+from book import Books
+
+class Record:
+    def __init__(self, book_management: Books) -> None:
+        self.records = []
+        self.check_outs = []
+        self.check_ins = []
+        self.book_management = book_management
+
+    def checkout_book(self, user_id, isbn):
+        for book in self.book_management.books:
+            if str(book.isbn) == str(isbn):
+                if book.qty > 0:
+                    book.qty -= 1
+                    self.check_outs.append({"user_id": user_id, "isbn": isbn})
+                    self.records.append({"user_id": user_id, "isbn": isbn, "action": "checkout"})
+                    print("Book checked out successfully.")
+                else:
+                    print("Sorry, book is not available for checkout")
+                return
+        print("Book not found")
+        
+
+    def checkin_book(self, user_id, isbn):
+        for book in self.book_management.books:
+            if str(book.isbn) == str(isbn):
+                book.qty += 1
+                self.check_ins.append({"user_id": user_id, "isbn": isbn})
+                self.records.append({"user_id": user_id, "isbn": isbn, "action": "checkin"})
+                print("Book checked in successfully")
+                return
+    print("Book not found")
