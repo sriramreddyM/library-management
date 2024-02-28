@@ -25,8 +25,20 @@ class Users:
                 row_dict = {header: row[i] for i, header in enumerate(self.headers)}
                 self.users.append(User(row_dict['name'], row_dict['user_id']))
 
+    def search_by_name(self, name: str) -> list:
+        """Search users by name."""
+        return [vars(user) for user in self.users if user.name == name]
+
+    def search_by_id(self, user_id: int) -> list:
+        """Search users by user_id."""
+        return [vars(user) for user in self.users if user.user_id == user_id]
+
     def add_user(self, name: str, user_id: int) -> None:
         """Add a new user."""
+        exist_user = self.search_by_id(user_id)
+        if len(exist_user) > 0:
+            print(f"user already exists with the {user_id}")
+            return
         user = User(name, user_id)
         self.users.append(user)
 
@@ -48,22 +60,7 @@ class Users:
                 return True
         return False  # User not found
 
-    def search_by_name(self, name: str) -> list:
-        """Search users by name."""
-        return [vars(user) for user in self.users if user.name == name]
-
-    def search_by_id(self, user_id: int) -> list:
-        """Search users by user_id."""
-        return [vars(user) for user in self.users if user.user_id == user_id]
-
     def list_users(self) -> None:
         """List all users."""
         for user in self.users:
             print(user)
-
-
-
-# users = []
-
-# def add_user(name, user_id):
-#     users.append({"name": name, "user_id": user_id})

@@ -1,5 +1,3 @@
-# Manage books (add, update, delete, list, and search by various attributes like title, author, or ISBN
-
 class Book:
     def __init__(self, title: str, author: str, isbn: int, qty: int=0) -> None:
         self.title = title
