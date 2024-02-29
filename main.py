@@ -13,10 +13,19 @@ storage_management = Storage('storage/books.csv', 'storage/users.csv', 'storage/
 storage_management.load()
 
 class Logger:
+    """
+    Simple Logger for logging events and actions within the system.
+    """
     def __init__(self, log_file='storage/library_app.log'):
         self.log_file = log_file
 
     def log(self, msg):
+        """
+        Logs a message with a timestamp to the log file.
+
+        Args:
+        - msg (str): message to be logged.
+        """
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(self.log_file, 'a+') as file:
             file.write(f"[{timestamp}] {msg}\n")
@@ -24,6 +33,10 @@ class Logger:
 logger = Logger()
 
 def add_book():
+    """
+    Adds a new book the system
+    LOgs the Adding action
+    """
     print("Please give the details of the book to add \n")
     title = input("Enter title: ")
     author = input("Enter author: ")
@@ -34,6 +47,9 @@ def add_book():
     logger.log(f"Added a new book: {title} by {author}, ISBN: {isbn}, Quantity: {qty}")
 
 def search_book():
+    """
+    Searches the system for a book by title or ISBN.
+    """
     print("1. to search by title")    
     print("2. to search by isbn")
     choice = input("select to search")
@@ -50,6 +66,9 @@ def search_book():
 
 
 def update_book():
+    """
+    Updates details of a book in the system.
+    """
     print("Please give present details of the book \n")
     title = input("Enter title")
     author = input("Enter author: ")
@@ -63,6 +82,9 @@ def update_book():
 
 
 def delete_book():
+    """
+    Deletes a book from the system.
+    """
     print("Please give details of the book to delete \n")
     title = input("Enter title")
     author = input("Enter author: ")
@@ -73,6 +95,9 @@ def delete_book():
 
 
 def add_user():
+    """
+    Adds a new user to the system.
+    """
     name = input("Enter user name: ")
     user_id = input("Enter user ID: ")
     user_management.add_user(name, user_id)
@@ -81,6 +106,9 @@ def add_user():
 
 
 def search_user():
+    """
+    Searches the system for a user by name or user ID.
+    """
     print("To search user \n")
     print("1. by name")
     print("2. by user_id")
@@ -100,6 +128,9 @@ def search_user():
         search_user()
 
 def delete_user():
+    """
+    Deletes a user from the system.
+    """
     print("Please give details of the user to delete \n")
     user_id = input("Enter user_id: ")
     user_management.delete_user(user_id)
@@ -108,6 +139,14 @@ def delete_user():
 
 
 def checkout_book():
+    """
+    Checks out a book to a user.
+
+    Prompts the user to give the user ID and ISBN of the book to check out.
+    Check out the book if both user and book are found in the system and available for checkout.
+    Saves changes to the storage.
+    Logs the checkout action.
+    """
     user_id = input("Enter user ID: ")
     isbn = input("Enter ISBN of the book to checkout: ")
     user = user_management.search_by_id(user_id)
@@ -124,6 +163,14 @@ def checkout_book():
     logger.log("Tried Book ISBN: {isbn} checkout by user: {user_id}")
 
 def checkin_book():
+    """
+    Check in a book from a user.
+
+    Prompts the user to provide the user ID and ISBN of the book to check in.
+    Check in the book if both user and book are found in the system.
+    Saves changes to the storage.
+    Logs the check-in action.
+    """
     user_id = input("Enter user ID: ")
     isbn = input("Enter ISBN of the book to checkout: ")
     # check if user and book exists before checkin
@@ -203,9 +250,13 @@ def save_status():
     pass
 
 def menu():
-    print("\nLibrary Management System")
+    print("\n")
+    print("======= ========== ======")
+    print("Library Management System")
+    print("======= ========== ======")
     for key, op in main_card.items():
         print(f"{key} for {op}")
+    print("------- ---------- -------")
     choice = input("Enter choice: ")
     if choice == "4":
         save_status()
@@ -213,6 +264,7 @@ def menu():
     if choice in main_card.keys():
         for sec_key, sec_op in second_card[choice].items():
             print(f"{sec_key} for {sec_op}")
+        print("------- ----------- -------")
         sec_choice = input("Enter choice: ")
         if sec_choice in second_card[choice].keys():
             status = operations[choice][sec_choice]()
@@ -222,7 +274,7 @@ def menu():
             print("Please select a valid operation")
     else:
         print("Please select a valid operation")
-        
+            
 def main():
     while True:
         menu()

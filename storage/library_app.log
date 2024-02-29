@@ -4,3 +4,4 @@
 [2024-02-29 00:53:08] Tried Book ISBN: {isbn} checkout by user: {user_id}
 [2024-02-29 00:53:25] Tried Book ISBN: {isbn} checkin by user: {user_id}
 [2024-02-29 00:53:48] Tried Book ISBN: {isbn} checkin by user: {user_id}
+[2024-02-29 09:11:48] Searched for book by isbn: 9780131101630
